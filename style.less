@@ -1,0 +1,312 @@
+@moon-color: #001f6e;
+@sun-color: #fbc531;
+@icon-color: gray;
+@background-light: rgb(255, 255, 255);
+@button-light: #163553;
+@button-dark: #1f1e1e;
+@background-dark: black;
+@day-sky: #74b9ff;
+@night-sky: #353b48;
+@night-water: #0a3d62;
+@night-earth: #16a085;
+@day-water: #4a69bd;
+@day-earth: #27ae60;
+
+.water {
+  fill: @night-water;
+  position: absolute;
+}
+
+.w2 {
+  top: -10%;
+  left: 20%;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  background-color: @day-sky;
+  transition: background-color 2s ease;
+}
+
+.theme-switch {
+  position: absolute;
+  background-color: @button-light;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 6px 12px;
+  border-radius: 24px;
+  border: 0;
+  display: flex;
+  transition: background-color 0.5s 0.2s ease;
+}
+
+.moon {
+  fill: @icon-color;
+  width: 50px;
+  height: 50px;
+  transition: fill 1s ease;
+}
+
+.sun {
+  fill: @sun-color;
+  width: 50px;
+  height: 50px;
+  transition: fill 1s ease;
+}
+
+.toggler {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  opacity: 0.3;
+  border-radius: 50%;
+  transition: transform 0.5s ease-in;
+}
+
+[theme='dark'] & {
+  .sun {
+    fill: @icon-color;
+  }
+  .moon {
+    fill: @moon-color;
+  }
+  .toggler {
+    transform: translate(100%);
+  }
+  .container {
+    background-color: @night-sky;
+  }
+  .theme-switch {
+    background-color: @button-dark;
+  }
+  .sphere {
+    fill: @moon-color;
+  }
+  .circle {
+    fill: @moon-color;
+  }
+  .sun-beams {
+    opacity: 0;
+    // animation: sunbeams-off 0.3s linear;
+  }
+  .mask {
+    opacity: 1;
+    fill: @night-sky;
+    transition: fill 2s ease-out, opacity 0.5s 1.5s ease-out;
+
+    // animation: mask-on 1s 1s ease-out forwards;
+  }
+  .inner {
+    background: linear-gradient(
+      90deg,
+      rgba(1, 77, 14, 1) 0%,
+      rgb(42, 99, 44) 43%,
+      rgb(80, 150, 94) 100%
+    );
+    background-position: 100% 50%;
+  }
+}
+
+.outer {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 10%;
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+}
+
+.inner {
+  background: linear-gradient(
+    270deg,
+    rgba(1, 77, 14, 1) 0%,
+    rgba(39, 174, 44, 1) 43%,
+    rgba(0, 255, 53, 1) 100%
+  );
+  background-position: 0% 50%;
+  border-radius: 50%;
+
+  position: absolute;
+  height: 250px;
+  width: 250px;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 2s linear;
+  cursor: pointer;
+}
+
+.sphere {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  fill: @sun-color;
+  left: 1%;
+  top: 37%;
+}
+
+.sphere-right {
+  transform: translateX(710%) translateY(0%);
+}
+
+.darkening {
+  animation: to-right 2s linear forwards;
+}
+
+.dawning {
+  animation: to-left 2s linear reverse;
+}
+
+.sun-beams {
+  opacity: 1;
+  stroke: @sun-color;
+  transition: opacity 1s 0.5s ease-out;
+}
+
+.circle {
+  fill: @sun-color;
+  transition: fill 1.5s ease-out;
+}
+
+.mask {
+  opacity: 0;
+  fill: @day-sky;
+  transition: fill 0.1s 0.5s ease-out, opacity 0.1s ease-out;
+}
+
+.remove-transition {
+  transition: none;
+}
+
+@keyframes sunbeams-off {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sunbeams-on {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mask-on {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    fill: @night-sky;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    fill: @night-sky;
+    opacity: 1;
+  }
+}
+
+@keyframes mask-off {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes to-left {
+  10% {
+    transform: translateX(60%) translateY(-50%);
+  }
+  20% {
+    transform: translateX(120%) translateY(-100%);
+  }
+  30% {
+    transform: translateX(180%) translateY(-150%);
+  }
+  40% {
+    transform: translateX(240%) translateY(-180%);
+  }
+  50% {
+    transform: translateX(320%) translateY(-200%);
+  }
+  60% {
+    transform: translateX(400%) translateY(-180%);
+  }
+  70% {
+    transform: translateX(500%) translateY(-150%);
+  }
+  80% {
+    transform: translateX(580%) translateY(-100%);
+  }
+  90% {
+    transform: translateX(650%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(710%) translateY(0%);
+    fill: @moon-color;
+  }
+}
+
+@keyframes to-right {
+  10% {
+    transform: translateX(60%) translateY(-50%);
+  }
+  20% {
+    transform: translateX(120%) translateY(-100%);
+  }
+  30% {
+    transform: translateX(180%) translateY(-150%);
+  }
+  40% {
+    transform: translateX(240%) translateY(-180%);
+  }
+  50% {
+    transform: translateX(320%) translateY(-200%);
+  }
+  60% {
+    transform: translateX(400%) translateY(-180%);
+  }
+  70% {
+    transform: translateX(500%) translateY(-150%);
+  }
+  80% {
+    transform: translateX(580%) translateY(-100%);
+  }
+  90% {
+    transform: translateX(650%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(710%) translateY(0%);
+    fill: @moon-color;
+  }
+}
